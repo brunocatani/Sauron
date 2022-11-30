@@ -5,7 +5,7 @@ import csv                      #Biblioteca CSV
 import os                       #Biblioteca OS, lê parametros sistema operacional
 import dlib                     #DLIB
 from datetime import datetime   #Lê valores de data e hora para csv
-import time as delay
+
 
 print(dlib.cuda.get_num_devices())
 
@@ -29,6 +29,9 @@ du_encoding = face_recognition.face_encodings(du_image)[0]
 
 roni_image = face_recognition.load_image_file("database/roni.jpeg")
 roni_encoding = face_recognition.face_encodings(roni_image)[0]
+
+
+print(bruno_encoding)
 
 
 kface_enconding = [
@@ -57,11 +60,16 @@ processing=True
 now = datetime.now()
 current_date = now.strftime("%Y-%m-%d")
 
-f = open(current_date+".csv",'w+',newline = '')
+directory = "confirmation/" + current_date
+
+try:
+    os.mkdir(directory)
+except FileExistsError:
+    pass
+
+f = open("confirmation/" +current_date+".csv",'w+',newline = '')
 lnwriter = csv.writer(f)
 
-directory = "confirmation/" + current_date
-os.mkdir(directory)
 
 while True:
 
@@ -69,7 +77,6 @@ while True:
 
     small_frame = cv2.resize(frame, (0,0), None, fx=0.25, fy=0.25)
     rgb_small_frame = cv2.cvtColor(small_frame, cv2.COLOR_BGR2RGB)
-    #rgb_small_frame = small_frame[:, :, ::-1]
 
     if processing:
         face_locations = face_recognition.face_locations(rgb_small_frame)
@@ -95,11 +102,9 @@ while True:
                     lnwriter.writerow([name,current_time])
                     print(name)
 
-                    cv2.imwrite(os.path.join(directory, name+".jpg"), frame)
+                    cv2.imwrite(os.path.join(directory, name+' '+current_time+".jpg"), frame)
 
             cv2.putText(frame, name, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255))
-
-            #delay.sleep(3)
 
     cv2.imshow("Sauron", frame)
 
