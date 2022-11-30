@@ -86,4 +86,3 @@ sudo pip3 install face_recognition
 --US-EN--
 
 This project is part of "Projeto Integrador 2022/2" supervised by the profesor Rafael Barbosa
-
