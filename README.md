@@ -25,7 +25,7 @@ https://github.com/opencv/opencv/releases
 - Jetpack SDK 4.6.2: 
 https://developer.nvidia.com/embedded/jetpack-sdk-462
 
-- Dlib 19.24: 
+- Dlib 19.17: 
 https://github.com/davisking/dlib
 
 - Face Recognition 1.3.0: 
