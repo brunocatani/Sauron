@@ -19,7 +19,7 @@ Hardware necessario:
 
 ## Requerimentos 
 
-- OpenCV 4.6.0 Compilado para  CUDA & CUDNN: 
+- OpenCV 4.6.0 Compilado para CUDA & CUDNN: 
 https://github.com/opencv/opencv/releases
 
 - Jetpack SDK 4.6.2: 
@@ -31,6 +31,9 @@ https://github.com/davisking/dlib
 - Face Recognition 1.3.0: 
 https://github.com/ageitgey/face_recognition
 
+- Python-Telegram-Bot 13.14:
+https://github.com/python-telegram-bot/python-telegram-bot
+
 
 
 ## Compilando OpenCV com CUDA na Jetson Nano
@@ -38,7 +41,7 @@ https://github.com/ageitgey/face_recognition
 Tutorial por completo por QENGINEERING
 https://qengineering.eu/install-opencv-4.5-on-jetson-nano.html
 
-## Compilando DLIB com CUDA
+## Compilando DLIB com CUDA + Face-Recognition
 
 - Instalando dependências base
 
@@ -71,6 +74,7 @@ forward_algo = forward_best_algo;
 - Editar linha
 ```
 //forward_algo = forward_best_algo;
+
 ```
 - Compilar e instalar Dlib (30-60 minutos na Jetson Nano)
 ```
