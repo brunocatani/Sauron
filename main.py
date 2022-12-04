@@ -106,9 +106,9 @@ lnwriter = csv.writer(f)
 
 def send_to_telegram(message):
 
-    apiToken = '5881673980:AAHB5N8l0fK-P-fvOpYncrrNYK2V3sVOg7c'
-    chatID = '-1001812740148'
-    apiURL = f'https://api.telegram.org/bot5881673980:AAHB5N8l0fK-P-fvOpYncrrNYK2V3sVOg7c/sendMessage'
+    apiToken = ''
+    chatID = ''
+    apiURL = f'https://api.telegram.org/bot{apiToken}/sendMessage'
 
     try:
         response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
