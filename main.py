@@ -6,12 +6,42 @@ import os                       #Biblioteca OS, lê parametros sistema operacion
 import dlib                     #DLIB
 from datetime import datetime   #Lê valores de data e hora para csv
 
+#Telegram Bot
+import requests
 
-print(dlib.cuda.get_num_devices())
+
+
+def gstreamer_pipeline(
+    sensor_id=0,
+    capture_width=1280,
+    capture_height=720,
+    display_width=960,
+    display_height=540,
+    framerate=60,
+    flip_method=0,
+):
+    return (
+        "nvarguscamerasrc sensor-id=%d !"
+        "video/x-raw(memory:NVMM), width=(int)%d, height=(int)%d, framerate=(fraction)%d/1 ! "
+        "nvvidconv flip-method=%d ! "
+        "video/x-raw, width=(int)%d, height=(int)%d, format=(string)BGRx ! "
+        "videoconvert ! "
+        "video/x-raw, format=(string)BGR ! appsink"
+        % (
+            sensor_id,
+            capture_width,
+            capture_height,
+            framerate,
+            flip_method,
+            display_width,
+            display_height,
+        )
+    )
 
 #Faz a captura da camera usando o OpenCV, Utilizando uma Pipeline pelo GSTREAMER
 
-vcap = cv2.VideoCapture(0)
+vcap = cv2.VideoCapture(gstreamer_pipeline(flip_method=0), cv2.CAP_GSTREAMER)
+
 
 #Carrega as imagens individualmente e faz a encodificação dela, armazenando dentro do Array
 
@@ -29,9 +59,6 @@ du_encoding = face_recognition.face_encodings(du_image)[0]
 
 roni_image = face_recognition.load_image_file("database/roni.jpeg")
 roni_encoding = face_recognition.face_encodings(roni_image)[0]
-
-
-print(bruno_encoding)
 
 
 kface_enconding = [
@@ -60,15 +87,37 @@ processing=True
 now = datetime.now()
 current_date = now.strftime("%Y-%m-%d")
 
-directory = "confirmation/" + current_date
+directory = "confirmation"
 
 try:
     os.mkdir(directory)
 except FileExistsError:
     pass
 
+date_directory = "confirmation/" + current_date
+
+try:
+    os.mkdir(date_directory)
+except FileExistsError:
+    pass
+
 f = open("confirmation/" +current_date+".csv",'w+',newline = '')
 lnwriter = csv.writer(f)
+
+def send_to_telegram(message):
+
+    apiToken = '5881673980:AAHB5N8l0fK-P-fvOpYncrrNYK2V3sVOg7c'
+    chatID = '-1001812740148'
+    apiURL = f'https://api.telegram.org/bot5881673980:AAHB5N8l0fK-P-fvOpYncrrNYK2V3sVOg7c/sendMessage'
+
+    try:
+        response = requests.post(apiURL, json={'chat_id': chatID, 'text': message})
+        print(response.text)
+    except Exception as e:
+        print(e)
+
+
+send_to_telegram("Chamada iniciada")
 
 
 while True:
@@ -102,7 +151,10 @@ while True:
                     lnwriter.writerow([name,current_time])
                     print(name)
 
-                    cv2.imwrite(os.path.join(directory, name+' '+current_time+".jpg"), frame)
+                    cv2.imwrite(os.path.join(date_directory, name+' '+current_time+".jpg"), frame)
+
+                    send_to_telegram('Bem vindo(a) '+name+" - Horario: "+current_time)
+
 
             cv2.putText(frame, name, (200, 200), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255))
 
