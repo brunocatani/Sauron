@@ -6,7 +6,7 @@ Esse projeto é parte do "Projeto Integrador 2022/2" supervisionado pelo profess
 
 Este projeto tem como objetivo construir um sistema de tomada de presença utilizando um Nvidia Jetson Nano 4GB
 
-  Projetado pelos integrantes:
+  Projetado e desenvolvido pelos integrantes:
 
 - Bruno Henrique Catani : https://github.com/brunocatani/
 
