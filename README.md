@@ -4,10 +4,15 @@
 
 
  
-Esse projeto é parte do "Projeto Integrador 2022/2" supervisionado pelo professor Rafael Barvosa
+Esse projeto é parte do "Projeto Integrador 2022/2" supervisionado pelo professor Rafael Barbosa
 
 Este projeto tem como objetivo construir um sistema de tomada de presença utilizando um Nvidia Jetson Nano 4GB
 
+Projetado pelos integrantes:
+Bruno Henrique Catani : https://github.com/brunocatani/
+Maria Eduarda Martinelli : https://github.com/DudamaMartinelli
+Eduardo Dallarosa : https://github.com/EduardoDallarosa
+Emanuelli Graff : https://github.com/manugraff
 
 
 Hardware necessario:
