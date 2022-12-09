@@ -16,6 +16,8 @@ Este projeto tem como objetivo construir um sistema de tomada de presença utili
 
 - Emanuelli Graff : https://github.com/manugraff
 
+![photo_2022-12-09_16-24-38](https://user-images.githubusercontent.com/94939071/206781432-4919374e-3e50-4fd2-8302-4b20e6515320.jpg)
+
 
 Hardware necessario:
 
